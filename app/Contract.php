@@ -177,6 +177,13 @@
 
       $fetch = $result->fetch();
 
+      if($this->getPayments($fetch['id'])) {
+        $payments = $this->getPayments($fetch['id']);
+      }
+      else {
+        $payments = null;
+      }
+
       $response = [
         'id' => (int) $fetch['id'],
         'client_id' => $fetch['client_id'],
@@ -188,6 +195,7 @@
         'value_rent' => $fetch['value_rent'],
         'value_condominium' => $fetch['value_condominium'],
         'value_tax' => $fetch['value_tax'],
+        'payments' => $payments
       ];
      
       return json_encode($response);
