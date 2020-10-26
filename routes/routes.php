@@ -1,5 +1,9 @@
 <?php
 
+if(!$_POST && file_get_contents("php://input")) {
+  $_POST = json_decode(file_get_contents("php://input"), true);
+} 
+
 // CLIENT "ROUTE"
   if(!empty($_GET) && $_GET['area'] == 'clients') {
 
@@ -160,18 +164,13 @@
 
     }
     else 
-    {
-
+    {      
       if(!empty($_POST)) {
-        echo $contract->create($_POST);
-
+        echo $contract->create($_POST);        
       }
-      else {
-
+      else {        
         echo $contract->all();
-
-      }
-    
+      }    
     }
   
   }
@@ -188,7 +187,7 @@
       if(!empty($_POST)) {
         
         if(!empty($_GET['action']) && $_GET['action'] == 'update') {
-
+          
           echo $payment->update($_GET['id'], $_POST);
         
         }
